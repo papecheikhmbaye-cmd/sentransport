@@ -1,4 +1,4 @@
-import "./ LigneBus .css ";
+import "./LigneBus.css";
 function LigneBus({ numero, depart, arrivee, arrets }) {
   return (
     <div className="ligne -bus">
