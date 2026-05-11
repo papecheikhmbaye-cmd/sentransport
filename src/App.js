@@ -9,6 +9,7 @@ import Footer from "./Footer";
 function App() {
   const [recherche, setRecherche] = useState("");
   const [ligneSelectionnee, setLigneSelectionnee] = useState(null);
+  const [nombreRecherches, setNombreRecherches] = useState(0);
 
   const lignes = [
     {
@@ -128,7 +129,15 @@ function App() {
       <Header />
 
       <main className="contenu">
-        <Recherche valeur={recherche} onChange={setRecherche} />
+        <p>Vous avez effectue {nombreRecherches} recherche(s)</p>
+        <Recherche
+          valeur={recherche}
+          onChange={(valeur) => {
+            setRecherche(valeur);
+            setNombreRecherches(nombreRecherches + 1);
+          }}
+        />
+        <button onClick={() => setRecherche("")}>Effacer</button>
 
         <p className="resultat-recherche">
           {lignesFiltrees.length} ligne
@@ -136,6 +145,7 @@ function App() {
           {lignesFiltrees.length > 1 ? "s" : ""}
         </p>
 
+        {lignesFiltrees.length === 0 && <p>Aucune ligne trouvée</p>}
         {lignesFiltrees.map((ligne) => (
           <LigneBus
             key={ligne.id}
